@@ -1,0 +1,51 @@
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+BluedivingNG
+------------
+Next generation bluetooth security tool
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+Programmed by Bastian Ballmann
+Web: http://www.datenterrorist.de
+Mail: balle@chaostal.de
+
+
+[Disclaimer]
+
+Respect the privacy of other human beings and think before you type!
+...and please dont use this software to destroy other peoples devices.
+That's dumb dude!
+
+
+[About]
+
+Bluediving is the next generation Bluetooth penetration suite.
+It implements several exploits like BlueBug, BlueSnarf, BlueSnarf++ or BlueSmack,
+tools like carwhisperer, redfang and bss and also offers features like a
+RFCOMM scanner and a L2CAP packetgenerator.
+
+Currently this code only runs on Linux 2.4 / 2.6 systems.
+Now there is also a FreeBSD port, which should be considered to be in
+Alpha state. Not all functionality has been ported and it's not massively
+tested, but it's working basically.
+You should have at least FreeBSD 5, but I am developing on a FreeBSD 6 
+machine and I cannot asure that all of the code is also running on version 5.
+
+
+[Requirements]
+
+Linux 2.4 / 2.6
+BlueZ
+sox
+obexftp
+libreadline
+expat / XML::Simple
+
+
+[Installation]
+
+Ok. Here we go... 
+
+[1] Install bluez libs and utils, libreadline, sox, obexftp.
+[2] Compile the shipped tools (cd tools; ./make-tools.sh)
+[3] Install the Perl module XML::Simple (perl -MCPAN -e 'install XML::Simple')
+[4] Have a look at the configuration file bluedivingNG.conf

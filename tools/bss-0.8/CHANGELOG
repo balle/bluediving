@@ -1,0 +1,58 @@
+0.8   - Pierre BETOUIN <pierre.betouin@security-labs.org>
+	- Last code checks and minor modifications
+	- Updated TODO & README
+	- Updated usage function in bss.c
+	- Updated relative files (webpages...)
+	- Release 0.8
+0.7.9 - Pierre BETOUIN <pierre.betouin@security-labs.org>
+	- Added '-i' support (hci[X])
+	- Modified perror strings (removed '\n')
+	- Cleaned code & added some comments
+        - Fixed some output problems
+      - Ollie Whitehouse < ol at uncon dot org>
+	- Added soaktest.sh
+	- Improved debugging output
+        - Slight speed improvement in l2fuzz_header (removed an extra l2ping)
+	- Updated NOTES about baseband firmware dieing
+0.7.8 - Pierre BETOUIN <pierre.betouin@security-labs.org>
+	- Added useful define's in bss.c
+	- Fixed some delays issues
+	- Fixed a bug in l2fuzz_header function (fields not incremented)
+0.7.7 - Ollie Whitehouse <ol at uncon dot org>
+	- Added support for -x in l2dos and l2fuzz_header
+	- Added support for -c in l2dos and l2fuzz_header
+	- Fixed memory leak in l2dos
+	- Fixed memory leak in l2fuzz
+0.7.6 - Pierre BETOUIN <pierre.betouin@security-labs.org>
+	- Fixed usage function
+	- Added -P0 function to bypass l2ping (useful with hosts not responding to such packets)
+	- Fixed several bugs in l2fuzz function
+	- Added full L2CAP header fuzzing mode
+	- Fixed stderr/stdout outputs in l2cap.c & bss.c 
+	- Added a warning in replay_packet (README)
+	- Updated Makefile (clean.sh for replayed packets included in clean rule)
+0.7.5 - Ollie Whitehouse (ol at uncon dot org)
+	- Fixed bug in l2ping.c which wasnt closing file handles when it should have
+0.7.4 - Ollie Whitehouse (ol at uncon dot org)
+	- Added the autogeneration of test cases source code
+	- Modified replay_packet template with place holders
+	- Added l2ping verification to replay_packet
+	- Updated README me more options
+	- Created replay_packet/README and associate shell scripts
+	- Updated Makefile to include replace code
+	- Updated TODO
+0.7.3 - Ollie Whitehouse (ol at uncon dot org)
+	- added silent mode (-q) on fuzzing
+	- (-c) now used in l2ping routines (if you use -c it will override -x)
+0.7.2 - Ollie Whitehouse (ol at uncon dot org)
+	- fixed a bug in l2ping.c which wasn't closing the socket (resulted in an error of too many open files after a while)
+	- added CHANGELOG
+0.7.1 - Ollie Whitehouse (ol at uncon dot org)
+	- fixed some output issues I introduced
+0.7.0 - Ollie Whitehouse (ol at uncon dot org)
+	- added delay (-d [seconds])
+	- included l2ping to ensure if the host has crashed or not
+	- added verbose (-v)
+	- added exit on verified crash (-x)
+	- added continue of things me might normally exit on (-c), although its not currently used
+	- updated Makefile to include the l2ping 

@@ -1,0 +1,22 @@
+1) change to bluez-utils-2.2 source directory
+
+cd /usr/src/redhat/SOURCES/bluez-utils-2.2/
+
+2) extract redfang tar to that directory
+
+tar -xvf /tmp/redfang.tar ./
+
+3) change to directory
+
+cd redrang
+
+4) run 'make'
+
+make
+
+5) run redfang
+
+./redfang hunt 100000
+
+note: 100000 is the timeout I have found anywhere between 25000 and 100000 
+yield results. However 100000 will give reliable results (although slow)

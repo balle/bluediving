@@ -1,0 +1,14 @@
+Feel free to add something to BSS :
+	* Check l2fuzz function recover struct (same as l2fuzz_header & l2dos) : it
+	seems there is a bug ?
+	* Add a src bdaddr option (cf. psm_scan.c)
+	* Add a SDP fuzz mode
+	* Clean main() function with getopt
+	* Add a RFCOMM fuzz mode
+	* Add a "undocumented PSM" fuzz mode
+	* Colorize interface (optional)
+	* Add ./configure (autoconf), checking for dependencies (especially libbluetooth) 
+	* fix some segfaults when parameters are not parsed correctly
+	* fix segfault with large payload (buffer overflow)
+
+All patches could be sent to Pierre BETOUIN <pierre.betouin@security-labs.org> for integration.

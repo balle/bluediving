@@ -1,0 +1,20 @@
+v1.4g - re establish hciReset and old fang log_open log_close and log_flush functionality
+v1.4f - remove gps support for now... the core scan code needs to be focused on. 
+      - remove stupid test functions... implement using real code later
+v1.4e - obexftptest added (uncommented). 
+      - tesing of gdbm support 
+v1.4d - fukka popen()! dup2() that shit! Don't forget to save the stdout fd.
+      - add l2ping test but did NOT implement it due to issues with busy devices.
+      - stop resetting hci devices ? remove hciReset() code all together
+      - modify findManf a bit to print vendor type upon device discovery
+      - included hciemu binary for folks that have less dongles than me.
+      - added %hx time() to device report, bdaddr_dev_XXXX.txt is the new file format.
+      - looping fixed
+v1.4  - make gps optional and *consider* moving sdptool to popen() for data parsing.
+      - cleaned up code style, no hanging-braces!
+      - try adding -D_REENTRANT to Makefile to help with thread related segfaults
+      - added device name to device report file name bdaddr_dev.txt is the new format.
+v1.3  - gps support
+v1.2  - fixed threading problem by moving inquiry_info *info inside hciDiscovery()
+v1.1  - Merged with sdptool from bluez-utils
+v1.0  - brute force removed, multi-dongle discovery code added.

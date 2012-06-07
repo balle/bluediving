@@ -1,0 +1,75 @@
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+Changes between 0.8 and 0.9
+(Greets from 24C3)
+
+- minor tools compile bugfixes by fireangel148
+- minor compile bugfixes by niekt
+- minor menu management / sound check bugfix by niekt
+- make_tools.sh now compiles redfang
+- Bugfixes in loop mode
+- Scan for specific device type
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+Changes between 0.7 and 0.8
+
+- get device class and type
+- automatically launch carwhisperer on headsets and carkits
+- automatically launch btftp on laptop and desktops
+- automatically send symbian remote restart and l2cap header
+  size overflow to mobile phones
+- fixed bug in scan_and_attack and scan_and_info
+- fixed bug in get_device_info
+- vendor detection via ieee oui file (thanks to hosh - evilgenius.de
+  for that great idea :)
+- New menu design (thanks to ^_^)
+- Updated bss to version 0.8
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+Changes between 0.6 and 0.7
+(greets from CCC easterhegg 2007)
+
+- Better log output and sdp scanning
+- Updated vendor detection
+- get_device_addr() for looking up local btaddr
+- l2cap connection resetter
+- fixed bug in change_btaddr()
+- implemented bccmd for better csr device resets
+- scan_and_info() (optional with loop)
+- hcidump < 1.30 overflow
+- l2cap header size overflow
+- Implemented greenplaque (as tool and scanning mode)
+- makefiles for compiling tools
+- New menus tools and exploits
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+Changes between 0.5 and 0.6
+
+- Implemented tools carwhisperer and bss
+- L2CAP packetgenerator
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+Changes between 0.4 and 0.5
+
+- Patches by johnc@grok.org.uk
+- New function to add a known device
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+Changes between 0.3 and 0.4
+
+- Bugfix in get_a_target()
+- Bugfix in find_channel()
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+Changes between 0.2 and 0.3
+
+- FreeBSD port (Alpha state)
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+Changes between 0.1 and 0.2
+(greets from 22C3)
+
+- Bugfixes in menu management
+- Better target selection
+- Better error messages
+- Configurable HCI device
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-

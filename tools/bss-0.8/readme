@@ -1,0 +1,143 @@
+BSS - Bluetooth Stash Smasher
+-----------------------------
+Pierre BETOUIN <pierre.betouin@security-labs.org>
+http://securitech.homeunix.org/blue/
+
+Performs several L2CAP checks sending malicious packets (L2CAP)
+Initial source code analysis from tanya tool (tbear)
+
+Example of use (short random L2CAP packets):
+--------------
+An example:
+	./bss -M 0 -m 13 -s 10 EF:F0:00:00:00:00  
+	.
+	[*] bss: l2ping returned that the host is up!
+	[I] Potential crash detected for EF:F0:00:00:00:00, check l2ping response above
+	[I] ----------------------------------------------------
+	[I] Host                EF:FF:00:00:00:00
+	[I] Packet size         0
+	[I] ----------------------------------------------------
+	[I] Replay buffer:
+        	char replay_buggy_packet[]="";
+
+	[I]----------------------------------------------------
+	
+Now isolate the packet you think caused it, then if you had autogenerate test 
+case on (-o) do the following:
+	[1] If you generated the test case go into the 'replay_packet' dir
+	[2] locate the testcase file
+	[3] ./makereplay <file - minus extension> 
+		i.e. ./makereplay replay_l2cap_packet_11022005101938.0
+	[4] ./replay <bdaddr>
+
+and try this packet against your equipment :
+	./replay 00:12:EE:XX:XX:XX
+
+see ./replay_packet/README for more details
+
+
+CORE OPTIONS
+------------
+------------------------------------------------------------------------------
+BSS - Bluetooth Stack Smasher - version 0.8
+------------------------------------------------------------------------------
+Usage: ./bss    [-i iface] [-d delay] [-c] [-v] [-x] [-P0] [-q] [-o]
+                [-s size] [-m mode] [-p pad_byte] [-M maxcrash_count] <bdaddr>
+		
+
+EXTRA OPTIONS
+-------------
+There are a number of other options side of core set these are detailed below.
+[-d delay] - Optional delay (miliseconds).
+[-c]       - Continue even on errors we would normally exit on (except malloc)
+             This overrides -x in most places
+[-v]       - Verbose debugging
+[-x]       - Exit on potential crashes that also don't respond to secondary l2ping's *
+[-P0]      - Do not perform L2CAP ping (some hosts don't respond to such packets
+             This overrides -x in most places
+[-q]       - Quiet mode - print minimal output
+[-o]       - Generate replay_packet.c automatically
+[-s size]  - L2CAP packet size (bytes)
+[-M value] - Max crash count before exiting (Mode 13)
+[-p value] - Padding value (modes 1-11)
+
+ [*] these can be considered verified crashes
+
+TIPS
+----
+* In order to benchmark BT implementation, you may want to use time command :
+time ./bss -m 13 <BT_ADDR>
+
+* You may increase -M value, which allows you to go on fuzzing even if
+some packets have not been sent to the equipment : some devices may
+crash because of flooding for instance. 0 means an infinite loop.
+
+
+OTHER EXAMPLES USING NEW OPTIONS
+--------------------------------
+[quite mode, generate testcase replay]
+This will generate a replay template for each test case which it thinks caused 
+a crash while running in quiet mode.
+	./bss -q -o -M 0 -m 13 -s 10 00:11:22:XX:YY:ZZ
+	[*] silent mode: on
+	[*] automatic replay_packet.c generation: on
+	.!G.!G.!G.!G.!G.!G.!G.
+	[!] l2ping: Recv failed: Connection reset by peer
+	!G.!G.!G.!G.!G.!G.!G.!G.!G.!G.!G.!G.!G.!G.!G.!G.!G.
+	[!] l2ping: Recv failed: Connection reset by peer
+	!G.!G.23 sent, 23 received, 0% loss
+
+The output means:
+	. (test case sent)
+	! (we think we got a crash)
+	G (we generated a replay file in 'replay_packet/'
+
+
+[quite mode, generate testcase replay only when host is down, exit when crash]
+This will generate a replay template for each test case which it verifys causes
+a crash while running in quiet mode. This will also exist once it's verified
+the device has crashed.
+	./bss -x -q -o -M 0 -m 13 -s 10 DE:AD:BE:EF:00:00
+	[*] exit on no response to l2ping: on
+	[*] silent mode: on
+	[*] automatic replay_packet.c generation: on
+	.!.!.!.!.!.!.!.
+	[!] l2ping: Recv failed: Connection reset by peer
+	!.!.!.!.!.!.!.!.!.!.!.!.!.!.!.!.!.
+	[!] l2ping: Recv failed: Connection reset by peer
+	!G
+
+[ Available modes ]
+	0  ALL MODES LISTED BELOW
+	1  L2CAP_COMMAND_REJ
+	2  L2CAP_CONN_REQ
+	3  L2CAP_CONN_RSP
+	4  L2CAP_CONF_REQ
+	5  L2CAP_CONF_RSP
+	6  L2CAP_DISCONN_REQ
+	7  L2CAP_DISCONN_RSP
+	8  L2CAP_ECHO_REQ
+	9  L2CAP_ECHO_RSP
+	10 L2CAP_INFO_REQ
+	11 L2CAP_INFO_RSP
+	12 L2CAP full header fuzzing
+	13 L2CAP Random Fuzzing
+
+[generate testcase]
+This will generate a test case .c file for everyone it suspects
+	./bss -o -M 0 -m 13 -s 10 CA:FE:BE:EF:00:00 
+	[*] automatic replay_packet.c generation: on
+	.
+	[*] bss: l2ping returned that the host is up!
+	[I] Potential crash detected for CA:FE:BE:EF:00:00, check l2ping response above
+	[I] ----------------------------------------------------
+	[I] Host                CA:EF:BE:EF:00:00
+	[I] Packet size         0
+	[I] ----------------------------------------------------
+	[I] Replay buffer:
+        	char replay_buggy_packet[]="";
+
+	[I]----------------------------------------------------
+	[d] generated ok!
+	.
+

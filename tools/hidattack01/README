@@ -1,0 +1,22 @@
+#
+# Collin R. Mulliner <collin@betaversion.net>
+#
+# http://www.mulliner.org/bluetooth/
+#
+
+Basic example on how to attack HID servers (host part of the Human Interface
+Device architecture). This basic example is against HID-keyboards, the
+sample file injects the scan codes for the four letters "0wnD" into the victims
+HID-server.
+
+ha.inp are the key press events for "0wnD" it's the same format as 
+/dev/input/eventX
+
+client mode:
+	./hidattack -e ha.inp -c BD_ADDR
+
+server mode:
+	./hidattack -e ha.inp -s
+
+
+generate .inp file with dump_event

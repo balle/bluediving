@@ -1,0 +1,19 @@
+greenplaque 1.x - the bluetooth hunter / killer
+(c)2005 digitalmunition.com
+
+.intro
+fang was a small proof-of-concept application to find non discoveredable
+bluetooth devices. 
+
+greenplaque on the other hand is an application to find discoverable 
+bluetooth devices. after being found the device will promptly be slayed. 
+
+.tested
+debian 3.1 (unstable)
+
+.credits
+Ollie Whitehouse [ollie@atstake.com]		   initial code / patches
+Simon Halsall    [s.halsall@eris.qinetiq.com]      threads and tidy.
+Stephen Kapp     [skapp@atstake.com] 		   patches / lots of functionality
+Kevin Finisterre [kfinisterre@digitalmunition.com] shredding code up to make greenplaque
+Tom Parker	 [tom@rooted.net]		   being a slut.

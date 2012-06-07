@@ -1,0 +1,107 @@
+Project Carwhisperer (http://trifinite.org/trifinite_stuff_carwhisperer.html)
+====================
+
+The carwhisperer project intends to sensibilise manufacturers of carkits and 
+other Bluetooth appliances without display and keyboard for the possible 
+security threat evolving from the use of standard passkeys.
+
+A Bluetooth passkey is used within the pairing process that takes place, when 
+two Bluetooth enabled devices connect for the first time. Besides other public 
+data, the passkey is a secret parameter used in the process that generates and 
+exchanges the so-called link key. In Bluetooth communication scenarios the link
+key is used for authentication and encryption of the information that is 
+exchanged between the counterparts of the communication.
+
+The cw_scanner script is repeatedly performing a device inquiry for visible 
+Bluetooth devices of which the class matches the one of Bluetooth Headsets 
+and Hands-Free Units. Once a visible Bluetooth device with the appropriate 
+device class is found, the cw_scanner script executes the carwhisperer binary 
+that connects to the found device (on RFCOMM channel 1) and opens a control 
+connection and connects the SCO links.
+
+The carwhiperer binary connects to the device found by the cw_scanner. The 
+passkey that is required for the initial connection to the device is provided 
+by the cw_pin.pl script that replaces the official Bluez PIN helper (graphical 
+application that usually prompts for the passkey). The cw_pin.pl script 
+provides the passkey depending on the Bluetooth address that requests it. 
+Depending on the first three bytes of the address, which references the 
+manufacturer, different passkeys are returned by the cw_pin.sh script. In 
+quite a few cases the preset standard passkey on headsets and handsfree units
+is '0000' or '1234'.
+
+Once the connection has been successfully established, the carwhisperer binary 
+starts sending audio to, and recording audio from the headset.
+This allows attackers to inject audio data into the car. This could be fake 
+traffic announcements or nice words. Attackers are also able to eavesdrop
+conversations among people sitting in the car.
+
+Ideally, the carwhisperer is used with a toooned dongle 
+(see http://trifinite.org/trifinite_stuff_bluetoooone.html) and a directional 
+antenna that enhances the range of a Bluetooth radio quite a bit.
+(see http://trifinite.org/trifinite_stuff_lds.html)
+
+Recommendations
+
+In order to avoid getting attacked by carwhisperer, manufacturers should not
+use standard passkeys in their Bluetooth appliances. Moreover, there should be
+some kind of direct interaction with the device that allows a device to connect.
+Another recommendation would be to switch the handsfree unit to invisible mode,
+when no authorized device connects to it within a certain time.
+
+Not all Bluetooth carkits are subject to this threat. There is quite a few
+Bluetooth carkits that use random passkeys that are generated for every 
+individual device during the production process. Carkits that are integrated 
+with a full infotainment system could use (and sometimes already do use) the 
+infotainment system's UI for acquiring a passkey from the user.
+
+Installation
+
+You install carwhisperer straight forward by typing in the following commands:
+
+$ make
+# make install
+
+If you don't like it, you perform a 
+
+# make uninstall
+
+Don't forget to make a copy of your original /etc/bluetooth/hcid.conf file
+before installation.
+
+Carwhispering
+
+By now, the carwhisperer allows only to inject prerecorded files and to record 
+audio from the car into a file. 
+
+Here are the commands that help you to create your own messages.
+
+For creating a messagefile you enter:
+sox -t wav -r 44100 -c 2 <your .wav-file> -t raw -r 8000 -c 1 -s -w message.raw
+
+For listening to the recorded audio you enter:
+sox -t raw -r 8000 -c 1 -s -w <recorded .raw file> -t ossdsp /dev/dsp
+(This needs ossdsp drivers... or oss emulation for alsa)
+
+For generating a .wav form the recorded aoudio you enter:
+sox -t raw -r 8000 -c 1 -s -w <recorded .raw file> -t wav -r 44100 -c 2 out.wav
+
+In order to run the car whisperer most effectively, you attach an antenna to a
+bluetoooned bleutooth dongle and start the cw_scanner script which will find 
+devices that probably are subject to the standard passkey attack. 
+
+Copy a message file to the working directory of cw_scanner. Once a 'victim'
+comes in the range the message is injected to the audio system of the car.
+At the same time a raw audio file is recorded to the 'results' directory that
+also will be created by the cw_script.
+
+The message file in the sample directory has been created by the festival 
+text to speech engine.
+
+You could also test the carwhisperer with a Bluetooth headset that you put into
+pairing mode before you start the cw_scanner script.
+
+Important
+
+If you use, modify or distribute the carwhisperer please give credit the
+trifinite.group (http://trifinite.org/).
+

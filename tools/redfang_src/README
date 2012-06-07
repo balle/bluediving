@@ -1,0 +1,22 @@
+redfang - the bluetooth hunter
+(c)2003 @stake Inc
+by Ollie Whitehouse [ollie@atstake.com]
+
+.intro
+fang is a small proof-of-concept application to find non discoveredable
+bluetooth devices. This is done by brute forcing the last six (6) bytes of 
+the bluetooth address of the device and doing a read_remote_name().
+
+currently to reduce the address space this will only scan the TDK 
+manufacturer assigned space although this is very easy to change.
+
+also due to the design of the bluez implementation of the bluetooth stack
+under linux and the design of this application it is very easy to modify
+the application to use multiple bluetooth devices (i.e. 4 threads 
+simultaniously scanning).
+
+.tested
+redhat 9
+
+.credits
+Ollie Whitehouse [ollie@atstake.com]

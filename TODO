@@ -1,0 +1,5 @@
+* get_a_target may choose all targets
+* carwhisperer realtime feature
+* implement hidattack
+* implement rfcomm packetgenerator
+* atshell - implement default at commands like read sms / phonebook / turn off

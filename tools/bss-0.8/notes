@@ -1,0 +1,5 @@
+During the development of this it was found it's important to monitor your
+	/var/log/messages
+
+I number of USB dongles where killed during the making of this tool which required
+them to be re-inserted.
