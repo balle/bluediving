@@ -21,5 +21,5 @@ install:
 uninstall:
 	rm /usr/bin/carwhisperer
 	mv /etc/bluetooth/hcid.conf.old /etc/bluetooth/hcid.conf
-	rm /usr/bin/cw_pin.sh 
+	rm /usr/bin/cw_pin.pl 
 	rm /usr/bin/cw_scanner 
