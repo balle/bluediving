@@ -46,6 +46,6 @@ expat / XML::Simple
 Ok. Here we go... 
 
 [1] Install bluez libs and utils, libreadline, sox, obexftp.
-[2] Compile the shipped tools (cd tools; ./make-tools.sh)
+[2] Compile the shipped tools (cd tools; ./make_tools.sh)
 [3] Install the Perl module XML::Simple (perl -MCPAN -e 'install XML::Simple')
 [4] Have a look at the configuration file bluedivingNG.conf
